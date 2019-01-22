@@ -163,11 +163,12 @@ public class Solution2C2Activity extends AppCompatActivity {
             @Override public void onResponse(Call<PostVideoResponse> call, Response<PostVideoResponse> response){
                 Toast.makeText(getApplicationContext(),"上传成功！！",Toast.LENGTH_SHORT).show();
                 mRv.getAdapter().notifyDataSetChanged();
-                resetRefreshBtn();
+                resetBtn();
             }
             @Override public void onFailure(Call<PostVideoResponse> call, Throwable t) {
                 Toast.makeText(getApplicationContext(),"上传失败！！",Toast.LENGTH_SHORT).show();
-                resetRefreshBtn();
+                t.printStackTrace();
+                resetBtn();
             }
         });
 
@@ -194,11 +195,11 @@ public class Solution2C2Activity extends AppCompatActivity {
             @Override public void onResponse(Call<FeedResponse> call, Response<FeedResponse> response){
               mFeeds = response.body().getFeed();
               mRv.getAdapter().notifyDataSetChanged();
-              resetBtn();
+                resetRefreshBtn();
             }
             @Override public void onFailure(Call<FeedResponse> call, Throwable t) {
                 Toast.makeText(getApplicationContext(),"获取失败！！",Toast.LENGTH_SHORT).show();
-               resetBtn();
+                resetRefreshBtn();
             }
         });
 
