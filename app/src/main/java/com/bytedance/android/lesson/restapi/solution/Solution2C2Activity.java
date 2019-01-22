@@ -167,7 +167,7 @@ public class Solution2C2Activity extends AppCompatActivity {
             }
             @Override public void onFailure(Call<PostVideoResponse> call, Throwable t) {
                 Toast.makeText(getApplicationContext(),"上传失败！！",Toast.LENGTH_SHORT).show();
-
+                resetRefreshBtn();
             }
         });
 
@@ -194,11 +194,11 @@ public class Solution2C2Activity extends AppCompatActivity {
             @Override public void onResponse(Call<FeedResponse> call, Response<FeedResponse> response){
               mFeeds = response.body().getFeed();
               mRv.getAdapter().notifyDataSetChanged();
-                resetRefreshBtn();
+              resetBtn();
             }
             @Override public void onFailure(Call<FeedResponse> call, Throwable t) {
                 Toast.makeText(getApplicationContext(),"获取失败！！",Toast.LENGTH_SHORT).show();
-                resetRefreshBtn();
+               resetBtn();
             }
         });
 
@@ -213,6 +213,11 @@ public class Solution2C2Activity extends AppCompatActivity {
         retrofit.create(IMiniDouyinService.class).getResour().
                 enqueue(callback);
     }
+    private void resetBtn() {
+        mBtn.setText(R.string.post_it);
+        mBtn.setEnabled(true);
+    }
+
     private void resetRefreshBtn() {
         mBtnRefresh.setText(R.string.refresh_feed);
         mBtnRefresh.setEnabled(true);
